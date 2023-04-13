@@ -34,10 +34,10 @@ STREAM_FLAG = True  # 是否开启流式推送
 USER_DICT_FILE = "all_user_dict_v2.pkl"  # 用户信息存储文件（包含版本）
 lock = threading.Lock()  # 用于线程锁
 
-project_info = "## ChatGPT 网页版    \n" \
-               " Code From  " \
-               "[ChatGPT-Web](https://www.baidu.com)  \n" \
-               "发送`帮助`可获取帮助  \n"
+project_info = "## 小王ai   \n" \
+               "  " \
+               "[ai](#)  \n" \
+               "  \n"
 
 
 def get_response_from_ChatGPT_API(message_context, apikey):
