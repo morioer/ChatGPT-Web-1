@@ -36,7 +36,7 @@ lock = threading.Lock()  # 用于线程锁
 
 project_info = "## 小王ai   \n" \
                "  " \
-               "[ai](#)  \n" \
+               "[](#)  \n" \
                "  \n"
 
 
@@ -274,7 +274,7 @@ def load_messages():
                                                              "#### 请输入已有用户`id`或创建新的用户`id`。\n"
                                                              "- 已有用户`id`请在输入框中直接输入\n"
                                                              "- 创建新的用户`id`请在输入框中输入`new:xxx`,其中`xxx`为你的自定义id，请牢记\n"
-                                                             "- 输入`帮助`以获取帮助提示"}]
+                                                             }]
     else:
         user_info = get_user_info(session.get('user_id'))
         chat_id = user_info['selected_chat_id']
@@ -322,9 +322,7 @@ def new_user_dict(user_id, send_time):
 
     user_dict['chats'][chat_id]['messages_history'].insert(1, {"role": "assistant",
                                                                "content": "- 创建新的用户id成功，请牢记该id  \n"
-                                                                          "- 您可以使用该网站提供的通用apikey进行对话，"
-                                                                          "也可以输入 set_apikey:[your_apikey](https://platform.openai.com/account/api-keys) "
-                                                                          "来设置用户专属apikey"})
+                                                                         })
     return user_dict
 
 
@@ -388,13 +386,13 @@ def return_message():
     send_time = request.values.get("send_time").strip()
     url_redirect = "url_redirect:/"
     if send_message == "帮助":
-        return "### 帮助\n" \
+        return "" \
                "1. 输入`new:xxx`创建新的用户id\n " \
                "2. 输入`id:your_id`切换到已有用户id，新会话时无需加`id:`进入已有用户\n" \
-               "3. 输入`set_apikey:`[your_apikey](https://platform.openai.com/account/api-keys)设置用户专属apikey，`set_apikey:none`可删除专属key\n" \
-               "4. 输入`rename_id:xxx`可将当前用户id更改\n" \
-               "5. 输入`查余额`可获得余额信息及最近几天使用量\n" \
-               "6. 输入`帮助`查看帮助信息"
+               "3. 输入`rename_id:xxx`可将当前用户id更改" 
+              
+               
+         
 
     if session.get('user_id') is None:  # 如果当前session未绑定用户
         print("当前会话为首次请求，用户输入:\t", send_message)
@@ -475,7 +473,7 @@ def return_message():
                 asyncio.run(save_all_user_dict())
                 print("修改用户id:\t", new_user_id)
                 return f"修改成功,请牢记新的用户id为:{new_user_id}"
-        elif send_message == "查余额":
+        elif send_message == "查余额w":
             user_info = get_user_info(session.get('user_id'))
             apikey = user_info.get('apikey')
             return get_balance(apikey)
@@ -676,6 +674,6 @@ if __name__ == '__main__':
 
     if len(API_KEY) == 0:
         # 退出程序
-        print("请在openai官网注册账号，获取api_key填写至程序内或命令行参数中")
+        print("错误")
         exit()
     app.run(host="0.0.0.0", port=PORT, debug=False)
